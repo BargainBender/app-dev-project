@@ -20,6 +20,7 @@ router.get('/', async function(req, res, next) {
 router.get('/insertuser', async function(req, res, next) {
   res.render('userForm')
 });
+
 // save user
 router.post('/saveuser', async function(req, res, next) {
   const newUser = {

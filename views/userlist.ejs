@@ -1,20 +1,37 @@
-<body>
-    <h1>Layout</h1>
-    <%= userList.length  %>
-    <a href="/insertuser"> Create User</a> 
-
-    
-    <ul>
+<%- include("layouts/header") -%>
+<div class="container mx-auto">
+  <div class="overflow-x-auto">
+    <table class="table">
+      <!-- head -->
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>First name</th>
+          <th>Last name</th>
+          <th>Favorite Color</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
         <% userList.forEach((user) => { %>
-          <li>Email: <%= user.email %></li>
-          <li>Firstname: <%= user.firstname %></li>
-          <li>Lastname: <%= user.lastname %></li>
+          <tr class="hover">
+            <th><%= user.id %></th>
+            <td><%= user.email %></td>
+            <td><%= user.firstname %></td>
+            <td><%= user.lastname %></td>
           
-          <li><td><a href="/edituser/<%=user.id%>" class="edit-link" >Edit</a></td></li>
-          <li><td><a href="/deleteuser/<%=user.id%>" class="edit-link" >Delete</a></td></li>
-          
-        <% }) %>
-      </ul>
-    
-</body>
+            <td class="flex gap-2">
+              <a href="/edituser/<%=user.id%>" class="edit-link btn btn-neutral btn-sm capitalize"><i class="fa-regular fa-pen-to-square"></i></a>
+              <a href="/deleteuser/<%=user.id%>" class="edit-link btn btn-primary btn-sm capitalize"><i class="fa-solid fa-trash"></i></a>
+            </td>
+          </tr>
+          <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="absolute bottom-0 right-0 mb-8 mr-8">
+  <a href="/insertuser" class="btn capitalize"><i class="fa-solid fa-user-plus"></i>Create user</a>
+</div>
 
+<%- include("layouts/footer") -%>

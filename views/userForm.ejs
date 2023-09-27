@@ -1,6 +1,5 @@
+<%- include("layouts/header") -%>
 <form action="/saveUser"  method="POST">  
-    
-
     <label >Firstname</label>
     <input style="margin: 10px;" type="text" placeholder="Firt Name" name="firstname" required >  
     <br>
@@ -11,5 +10,5 @@
     <input style="margin: 10px;"  type="email" placeholder="Email" name="email" required >  
     <br>
     <button style="margin: 10px;"  type="submit">Submit</button>
-   
 </form>
+<%- include("layouts/footer") -%>

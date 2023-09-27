@@ -5,7 +5,7 @@ const config = require('../config');
 async function getMultipleUsers(page = 1){
   const offset = helper.getOffset(page, config.listPerPage);
   const rows = await db.query(
-    `SELECT id, firstname, lastname,email  FROM users LIMIT ${offset},${config.listPerPage}`
+    `SELECT id, firstname, lastname, email FROM users LIMIT ${offset},${config.listPerPage}`
   );
   const users = helper.emptyOrRows(rows);
   const meta = {page};
@@ -15,6 +15,7 @@ async function getMultipleUsers(page = 1){
     meta
   }
 }
+
 async function getUser(id){
   const row = await db.query(
     `SELECT id, firstname, lastname,email  
@@ -41,6 +42,7 @@ async function updateUser(newUser){
     WHERE id='${newUser.id}'`
   );
 }
+
 async function deleteUser(id){
   const row = await db.query(
     `DELETE FROM users
