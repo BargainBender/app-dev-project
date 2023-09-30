@@ -94,6 +94,7 @@ router.post('/updateuser', async function (req, res, next) {
 
 // delete user
 router.get('/deleteuser/:id', async function (req, res, next) {
+  const TAG = "router get /deleteuser/:id"
   const id = req.params.id
   try {
     data = await users.deleteUser(id)
@@ -101,6 +102,7 @@ router.get('/deleteuser/:id', async function (req, res, next) {
     console.error(`Error deleting user `, err.message)
     next(err)
   }
-  res.redirect('/')
+  dlog(req.query.continue, TAG)
+  res.redirect(req.query.continue || "")
 })
 module.exports = router

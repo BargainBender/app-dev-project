@@ -23,9 +23,9 @@ function buildLinks(query, pageCount) {
   return {
     relaxedBtn: "?" + qs.stringify({...query, view: "relaxed"}),
     condensedBtn: "?" + qs.stringify({...query, view: "condensed"}),
-    limit10Btn: "?" + qs.stringify({...query, limit: 10, page: 1}),
-    limit25Btn: "?" + qs.stringify({...query, limit: 25, page: 1}),
-    limit50Btn: "?" + qs.stringify({...query, limit: 50, page: 1}),
+    limit10Btn: "?" + qs.stringify({...query, limit: 10}),
+    limit25Btn: "?" + qs.stringify({...query, limit: 25}),
+    limit50Btn: "?" + qs.stringify({...query, limit: 50}),
     paginationLinks,
   }
 }

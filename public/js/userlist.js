@@ -1,5 +1,4 @@
 const params = new URLSearchParams(window.location.search)
-console.log(params.toString())
 
 // If page is greater than 
 if (params.has("page") && params.get("page") > totalPages) {
@@ -28,10 +27,6 @@ if (params.has("limit") && params.get("limit") == 25) {
   document.querySelector("#limit50Btn").classList.add("btn-primary", "text-primary-content")
 } else {
   document.querySelector("#limit10Btn").classList.add("btn-primary", "text-primary-content")
-}
-
-for (const [key, value] of params) {
-    console.log(`${key}:${value}`);
 }
 
 let returnFromLinks = document.querySelectorAll("[data-return-from]")
