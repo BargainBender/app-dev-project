@@ -8,8 +8,7 @@ const config = {
     password: process.env.MYSQL_PASSWORD,
     database: process.env.MYSQL_SCHEMA,
     connectTimeout: 60000
-  },
-  listPerPage: 10,
-};
+  }
+}
 
 module.exports = config;

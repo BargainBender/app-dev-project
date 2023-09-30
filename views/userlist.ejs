@@ -1,14 +1,46 @@
 <%- include("layouts/header") -%>
-
-<div class="container flex items-center px-8 mx-auto gap-4 mt-8 mb-4">
-  <h1 class="font-bold">Total users: <%= userList.length %></h1>
-  <div class="join">
-    <a href="" class="btn join-item btn-neutral text-neutral-content">Relaxed</a>
-    <a href="" class="btn join-item btn-">Condensed</a>
+<script>
+  const totalPages = parseInt("<%= totalPages %>")
+</script>
+<div class="container flex flex-wrap items-center px-8 mx-auto gap-8 mt-8 mb-4">
+  <hr class="hidden btn-sm">
+  <h1 class="font-bold">Total users: <%= totalUsers %></h1>
+  <div class="flex justify-center items-center gap-2">
+    <p class="font-bold">Style</p>
+    <div class="join">
+      <a href="<%= links.relaxedBtn %>"
+        id="relaxedViewBtn"
+        data-dynamic-btn
+        class="btn btn-md join-item">Relaxed</a>
+  
+      <a href="<%= links.condensedBtn %>"
+        id="condensedViewBtn"
+        data-dynamic-btn
+        class="btn btn-md join-item">Condensed</a>
+    </div>
+  </div>
+  <div class="flex justify-center items-center gap-2">
+    <p class="font-bold">Items/page</p>
+    <div class="join">
+      <a href="<%= links.limit10Btn %>"
+        id="limit10Btn"
+        data-dynamic-btn
+        class="btn btn-md join-item">10</a>
+  
+      <a href="<%= links.limit25Btn %>"
+        id="limit25Btn"
+        data-dynamic-btn
+        class="btn btn-md join-item">25</a>
+  
+      <a href="<%= links.limit50Btn %>"
+        id="limit50Btn"
+        data-dynamic-btn
+        class="btn btn-md join-item">50</a>
+      </div>
   </div>
 </div>
 
-<div class="container px-8 mx-auto">
+<div class="container px-8 mx-auto mb-8">
   <div class="overflow-x-auto">
     <table class="table">
       <!-- head -->
@@ -23,15 +55,15 @@
       </thead>
       <tbody>
         <% userList.forEach((user) => { %>
-          <tr class="hover">
+          <tr class="user-row hover transition duration-150">
             <th><%= user.id %></th>
             <td><%= user.firstname %></td>
             <td><%= user.lastname %></td>
             <td><%= user.email %></td>
           
-            <td class="flex join">
-              <a href="/edituser/<%=user.id%>" class="join-item btn capitalize"><i class="fa-regular fa-pen-to-square"></i></a>
-              <a href="/deleteuser/<%=user.id%>" class="join-item btn btn-error capitalize"><i class="fa-solid fa-trash"></i></a>
+            <td class="flex join transition duration-150 opacity-0">
+              <a href="/edituser/<%=user.id%>" data-return-from data-dynamic-btn class="join-item btn btn-primary text-primary-content capitalize"><i class="fa-regular fa-pen-to-square"></i></a>
+              <a href="/deleteuser/<%=user.id%>" data-return-from data-dynamic-btn class="join-item btn btn-error text-error-content capitalize"><i class="fa-solid fa-trash"></i></a>
             </td>
           </tr>
           <% }) %>
@@ -39,8 +71,23 @@
     </table>
   </div>
 </div>
+
+<div class="join flex flex-wrap justify-center gap-y-2 mx-auto mb-4">
+  <% if (links.paginationLinks.length === 1) { %>
+    <a href="<%= links.paginationLinks[0] %>" data-dynamic-btn class="btn btn-primary text-primary-content">
+      1
+    </a>
+  <% } else { %>
+    <% links.paginationLinks.forEach((link, index) => { %>
+      <a href="<%= link %>" data-dynamic-btn class="btn join-item <% if (index === currentPage - 1) { %>btn-primary text-primary-content<% } %>">
+        <%= index + 1 %>
+      </a>
+    <% }) %>
+  <% } %>
+</div>
+
 <div class="fixed bottom-0 right-0 mb-8 mr-8">
-  <a href="/insertuser" class="btn capitalize"><i class="fa-solid fa-user-plus"></i>Create user</a>
+  <a href="/insertuser" data-dynamic-btn class="btn capitalize"><i class="fa-solid fa-user-plus"></i>Create user</a>
 </div>
 <script src="/js/userlist.js"></script>
 

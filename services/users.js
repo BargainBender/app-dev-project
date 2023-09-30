@@ -1,14 +1,13 @@
 const db = require('./db');
 const helper = require('../helper');
-const config = require('../config');
 
-async function getMultipleUsers(page = 1){
-  const offset = helper.getOffset(page, config.listPerPage);
+async function getMultipleUsers(offset = 0, limit = 10) {
   const rows = await db.query(
-    `SELECT id, firstname, lastname, email FROM users LIMIT ${offset},${config.listPerPage}`
+    `SELECT id, firstname, lastname, email FROM users LIMIT ${offset},${limit}`
   );
+  const totalUsers = await db.query("SELECT COUNT(*) as count FROM users")
   const users = helper.emptyOrRows(rows);
-  const meta = {page};
+  const meta = { pageCount: Math.ceil(totalUsers[0].count / limit), totalUsers: totalUsers[0].count };
 
   return {
     users,

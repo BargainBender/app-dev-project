@@ -1,6 +1,6 @@
 <%- include("layouts/header") -%>
     <form action="/saveUser"  method="POST"
-        class="flex flex-col gap-y-4 max-w-lg mx-auto px-8">
+        class="flex flex-col gap-y-4 max-w-lg mx-auto px-8 mt-8">
         <label for="firstname" class="w-full">
             <p class="mb-1">First name</p>
             <input class="input input-bordered w-full" type="text" placeholder="Juan" id="firstname" name="firstname" required >  
@@ -13,6 +13,6 @@
             <p class="mb-1">Email</p>
             <input class="input input-bordered w-full" type="email" placeholder="jdelacruz@example.com" id="email" name="email" required >  
         </label>  
-        <button class="btn btn-primary"  type="submit">Submit</button>
+        <button class="btn btn-primary" type="submit">Submit</button>
     </form>
 <%- include("layouts/footer") -%>

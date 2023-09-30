@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.user-row:hover > td {
+  opacity: 1;
+}
