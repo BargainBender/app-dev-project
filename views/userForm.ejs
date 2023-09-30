@@ -1,14 +1,18 @@
 <%- include("layouts/header") -%>
-<form action="/saveUser"  method="POST">  
-    <label >Firstname</label>
-    <input style="margin: 10px;" type="text" placeholder="Firt Name" name="firstname" required >  
-    <br>
-    <label>Lastname</label>
-    <input style="margin: 10px;"  type="text" placeholder="Last Name" name="lastname" required >  
-    <br>
-    <label>Email</label>
-    <input style="margin: 10px;"  type="email" placeholder="Email" name="email" required >  
-    <br>
-    <button style="margin: 10px;"  type="submit">Submit</button>
-</form>
+    <form action="/saveUser"  method="POST"
+        class="flex flex-col gap-y-4 max-w-lg mx-auto px-8">
+        <label for="firstname" class="w-full">
+            <p class="mb-1">First name</p>
+            <input class="input input-bordered w-full" type="text" placeholder="Juan" id="firstname" name="firstname" required >  
+        </label>  
+        <label for="lastname" class="w-full">
+            <p class="mb-1">Last name</p>
+            <input class="input input-bordered w-full" type="text" placeholder="dela Cruz" id="lastname" name="lastname" required >  
+        </label>  
+        <label for="email" class="w-full">
+            <p class="mb-1">Email</p>
+            <input class="input input-bordered w-full" type="email" placeholder="jdelacruz@example.com" id="email" name="email" required >  
+        </label>  
+        <button class="btn btn-primary"  type="submit">Submit</button>
+    </form>
 <%- include("layouts/footer") -%>
