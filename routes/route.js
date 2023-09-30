@@ -44,6 +44,41 @@ router.get('/', async function (req, res, next) {
   }
 })
 
+// GET search users
+router.get('/search', async function (req, res, next) {
+  const TAG = "router get /search"
+
+  let page = 1
+  let limit = 
+  req.query.limit == 10 ||
+  req.query.limit == 25 ||
+  req.query.limit == 50 ? req.query.limit : 10
+
+  let searchTerm = req.query.term
+
+  try {
+    let pageQuery = parseInt(req.query.page || 1)
+    page = pageQuery < 1 ? 1 : pageQuery
+  } catch (_) {}
+  
+  const offset = getOffset(page, limit)
+  try {
+    let data = await users.getMultipleUsersWithSearch(offset, limit, searchTerm)
+    let userList = data.users    
+    dlog(data, TAG)
+
+    res.status(200).json({ 
+      userList,
+      totalUsers: data.meta.totalUsers,
+      currentPage: page,
+      // totalPages: data.meta.pageCount,
+    })
+  } catch (err) {
+    derror(err.message , TAG)
+    next(err)
+  }
+})
+
 // Insert user form
 router.get('/insertuser', async function (req, res, next) {
   res.render('userForm')

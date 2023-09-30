@@ -38,12 +38,12 @@
         class="btn btn-md join-item">50</a>
       </div>
   </div>
+  <input type="text" id="searchInput" placeholder="Search" class="input input-bordered w-full max-w-xs" />
 </div>
 
 <div class="container px-8 mx-auto mb-8">
   <div class="overflow-x-auto">
     <table class="table">
-      <!-- head -->
       <thead>
         <tr>
           <th>id</th>
@@ -53,7 +53,7 @@
           <th></th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="userTableContents">
         <% userList.forEach((user) => { %>
           <tr class="user-row hover transition duration-150">
             <th><%= user.id %></th>
@@ -72,7 +72,7 @@
   </div>
 </div>
 
-<div class="join flex flex-wrap justify-center gap-y-2 mx-auto mb-4">
+<div id="pagesLinks" class="join flex flex-wrap justify-center gap-y-2 mx-auto mb-4">
   <% if (links.paginationLinks.length === 1) { %>
     <a href="<%= links.paginationLinks[0] %>" data-dynamic-btn class="btn btn-primary text-primary-content">
       1
@@ -89,6 +89,9 @@
 <div class="fixed bottom-0 right-0 mb-8 mr-8">
   <a href="/insertuser" data-return-from data-dynamic-btn class="btn capitalize"><i class="fa-solid fa-user-plus"></i>Create user</a>
 </div>
+<script src="
+https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js
+"></script>
 <script src="/js/userlist.js"></script>
 
 <%- include("layouts/footer") -%>

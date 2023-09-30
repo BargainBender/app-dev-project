@@ -1477,6 +1477,10 @@ html {
   max-width: 32rem;
 }
 
+.max-w-xs {
+  max-width: 20rem;
+}
+
 .flex-col {
   flex-direction: column;
 }

@@ -15,6 +15,33 @@ async function getMultipleUsers(offset = 0, limit = 10) {
   }
 }
 
+async function getMultipleUsersWithSearch(offset = 0, limit = 10, searchTerm) {
+  const TAG = "getMultipleUsersWithSearch"
+  const rows = await db.query(
+    `SELECT * FROM users
+      WHERE id LIKE '%${searchTerm}%'
+      OR firstname LIKE '%${searchTerm}%'
+      OR lastname LIKE '%${searchTerm}%'
+      OR lastname LIKE '%${searchTerm}%'
+    LIMIT ${offset},${limit}`
+  )
+
+  const totalUsers = await db.query(
+    `SELECT COUNT(*) as count FROM users
+      WHERE id LIKE '%${searchTerm}%'
+      OR firstname LIKE '%${searchTerm}%'
+      OR lastname LIKE '%${searchTerm}%'
+      OR email LIKE '%${searchTerm}%'`
+  )
+  
+  const users = helper.emptyOrRows(rows);
+  const meta = { pageCount: Math.ceil(totalUsers[0].count / limit), totalUsers: totalUsers[0].count }
+  return {
+    users,
+    meta
+  }
+}
+
 async function getUser(id){
   const row = await db.query(
     `SELECT id, firstname, lastname,email  
@@ -51,6 +78,7 @@ async function deleteUser(id){
 
 module.exports = {
   getMultipleUsers,
+  getMultipleUsersWithSearch,
   getUser,
   saveUser,
   updateUser,
