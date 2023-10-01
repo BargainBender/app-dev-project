@@ -1,6 +1,7 @@
 var express = require('express')
 var router = express.Router()
 const users = require('../services/users')
+const { buildPaginationLinks } = require('../helper')
 const buildLinks = require("../helper").buildLinks
 const dlog = require("../helper").dlog
 const derror = require("../helper").derror
@@ -22,8 +23,8 @@ router.get('/', async function (req, res, next) {
   } catch (_) {}
   
   const offset = getOffset(page, limit)
+  // dlog(offset, TAG, "Offset")
   try {
-
     let data = await users.getMultipleUsers(offset, limit)
     let userList = data.users    
     dlog(data, TAG)
@@ -47,14 +48,14 @@ router.get('/', async function (req, res, next) {
 // GET search users
 router.get('/search', async function (req, res, next) {
   const TAG = "router get /search"
-
+  dlog(req.query, TAG)
   let page = 1
   let limit = 
   req.query.limit == 10 ||
   req.query.limit == 25 ||
   req.query.limit == 50 ? req.query.limit : 10
 
-  let searchTerm = req.query.term
+  let searchTerm = req.query.term || ""
 
   try {
     let pageQuery = parseInt(req.query.page || 1)
@@ -62,6 +63,7 @@ router.get('/search', async function (req, res, next) {
   } catch (_) {}
   
   const offset = getOffset(page, limit)
+  dlog(offset, TAG, "Offset")
   try {
     let data = await users.getMultipleUsersWithSearch(offset, limit, searchTerm)
     let userList = data.users    
@@ -71,7 +73,8 @@ router.get('/search', async function (req, res, next) {
       userList,
       totalUsers: data.meta.totalUsers,
       currentPage: page,
-      // totalPages: data.meta.pageCount,
+      totalPages: data.meta.pageCount,
+      paginationLinks: buildPaginationLinks(req.query, data.meta.pageCount)
     })
   } catch (err) {
     derror(err.message , TAG)

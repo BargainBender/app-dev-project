@@ -2,6 +2,7 @@
 <script>
   const totalPages = parseInt("<%= totalPages %>")
 </script>
+
 <div class="container flex flex-wrap items-center px-8 mx-auto gap-8 mt-8 mb-4">
   <hr class="hidden btn-sm">
   <h1 class="font-bold">Total users: <%= totalUsers %></h1>
@@ -89,9 +90,9 @@
 <div class="fixed bottom-0 right-0 mb-8 mr-8">
   <a href="/insertuser" data-return-from data-dynamic-btn class="btn capitalize"><i class="fa-solid fa-user-plus"></i>Create user</a>
 </div>
+
 <script src="
 https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js
 "></script>
 <script src="/js/userlist.js"></script>
-
 <%- include("layouts/footer") -%>

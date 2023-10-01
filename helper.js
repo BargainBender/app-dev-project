@@ -13,12 +13,7 @@ function emptyOrRows(rows) {
 }
 
 function buildLinks(query, pageCount) {
-
-  let paginationLinks = []
-
-  for (let i = 1; i <= pageCount; i++) {
-    paginationLinks.push("?" + qs.stringify({...query, page: i}))
-  }
+  let paginationLinks = buildPaginationLinks(query, pageCount)
 
   return {
     relaxedBtn: "?" + qs.stringify({...query, view: "relaxed"}),
@@ -28,6 +23,15 @@ function buildLinks(query, pageCount) {
     limit50Btn: "?" + qs.stringify({...query, limit: 50}),
     paginationLinks,
   }
+}
+
+function buildPaginationLinks(query, pageCount) {
+  let paginationLinks = []
+
+  for (let i = 1; i <= pageCount; i++) {
+    paginationLinks.push("?" + qs.stringify({...query, page: i}))
+  }
+  return paginationLinks
 }
 
 function dlog(obj, tag, description) {
@@ -48,6 +52,7 @@ module.exports = {
   getOffset,
   emptyOrRows,
   buildLinks,
+  buildPaginationLinks,
   dlog,
   derror,
 }
