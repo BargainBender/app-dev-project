@@ -9,7 +9,6 @@ if (params.has("page") && params.get("page") > totalPages) {
 
 // Check for search term in query params, then run search if exists
 if (params.has("term") && params.get("term").trim().length !== 0) {
-  console.log("replace term")
   searchInput.value = params.get("term")
   searchFunction(params.get("term"))
 }
@@ -62,12 +61,12 @@ function searchFunction(searchText) {
       searchQueryHome.delete("term")
     }
     window.history.replaceState(null, null, 
-      `http://localhost:3000/?${searchQueryHome.toString()}`
+      `${window.location.origin}/?${searchQueryHome.toString()}`
       )
     } else {
     searchQueryHome.set("term", searchText)
     window.history.replaceState(null, null, 
-      `http://localhost:3000/?${searchQueryHome.toString()}`
+      `${window.location.origin}/?${searchQueryHome.toString()}`
       )
   }
 
@@ -82,7 +81,7 @@ function searchFunction(searchText) {
   if (searchQuery.has("page") && searchQuery.get("page").trim().length === 0) {
     searchQuery.set("page", 1)
   }
-  fetch(`http://localhost:3000/search?${searchQuery.toString()}`)
+  fetch(`${window.location.origin}/search?${searchQuery.toString()}`)
   .then(res => res.json())
   .then(data => {
     let tableRows = document.querySelector("#userTableContents")
