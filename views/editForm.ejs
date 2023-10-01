@@ -1,7 +1,8 @@
 <%- include("layouts/header") -%>
-<form action="/updateuser" method="POST"
+<form id="form" action="/updateuser" method="POST"
   class="flex flex-col gap-y-4 max-w-lg mx-auto px-8 mt-8">
-  <input type="hidden" name="id" value="<%=user.id %>">  
+  <input type="hidden" name="id" value="<%=user.id %>">
+  <input type="hidden" name="continue">
   <label for="firstname" class="w-full">
     <p class="mb-1">First name</p>
     <input class="input input-bordered w-full" type="text" placeholder="firstname" name="firstname" id="firstname" value="<%= user.firstname %>" required>  
@@ -15,13 +16,11 @@
     <input class="input input-bordered w-full" type="email" placeholder="Email" name="email" id="email" value="<%= user.email %>" required>
   </label>
     
-  <a class="btn btn-primary" data-return-link href="/">
-    <button type="submit" class="capitalize">
-      Update
-    </button>
-  </a>
+  <button type="submit" class="btn btn-primary capitalize">
+    Update
+  </button>
 
-    <a data-return-link href="/" class="btn">Cancel</a>
+  <a data-return-link href="/" class="btn capitalize">Cancel</a>
 </form>
 <script src="/js/continue.js"></script>
 <%- include("layouts/footer") -%>

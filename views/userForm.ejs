@@ -1,5 +1,5 @@
 <%- include("layouts/header") -%>
-    <form action="/saveUser"  method="POST"
+    <form id="form" action="/saveUser"  method="POST"
         class="flex flex-col gap-y-4 max-w-lg mx-auto px-8 mt-8">
         <label for="firstname" class="w-full">
             <p class="mb-1">First name</p>
@@ -13,10 +13,10 @@
             <p class="mb-1">Email</p>
             <input class="input input-bordered w-full" type="email" placeholder="jdelacruz@example.com" id="email" name="email" required >  
         </label>  
-        <button class="btn btn-primary" type="submit">
-          <a id="return" href="/">Submit</a>
+        <button type="submit" class="btn btn-primary capitalize">
+          Submit
         </button>
-        <a id="return" href="/" class="btn">Cancel</a>
+        <a data-return-link href="/" class="btn capitalize">Cancel</a>
       </form>
       <script src="/js/continue.js"></script>
 <%- include("layouts/footer") -%>

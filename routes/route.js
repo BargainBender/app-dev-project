@@ -27,7 +27,7 @@ router.get('/', async function (req, res, next) {
   try {
     let data = await users.getMultipleUsers(offset, limit)
     let userList = data.users    
-    dlog(data, TAG)
+    // dlog(data, TAG)
 
     const links = buildLinks(req.query, data.meta.pageCount)
     dlog(links, TAG, "Generated links")
@@ -67,7 +67,7 @@ router.get('/search', async function (req, res, next) {
   try {
     let data = await users.getMultipleUsersWithSearch(offset, limit, searchTerm)
     let userList = data.users    
-    dlog(data, TAG)
+    // dlog(data, TAG)
 
     res.status(200).json({ 
       userList,
@@ -115,6 +115,7 @@ router.get('/edituser/:id', async function (req, res, next) {
 
 //update user
 router.post('/updateuser', async function (req, res, next) {
+  const TAG = "route post /updateuser"
   const user = {
     email: req.body.email,
     firstname: req.body.firstname,
@@ -127,6 +128,14 @@ router.post('/updateuser', async function (req, res, next) {
     console.error(`Error updating user `, err.message);
     next(err)
   }
+
+  if (req.query.continue && req.query.continue.length != 0) {
+    dlog("redirect", TAG)
+    res.redirect(req.query.continue)
+    dlog("Redirected to " + req.query.continue, TAG)
+    return
+  }
+  dlog("Redirected to /")
   res.redirect('/')
 })
 
