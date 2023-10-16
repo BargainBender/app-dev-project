@@ -22,7 +22,7 @@ async function getMultipleUsersWithSearch(offset = 0, limit = 10, searchTerm) {
       WHERE id LIKE '%${searchTerm}%'
       OR firstname LIKE '%${searchTerm}%'
       OR lastname LIKE '%${searchTerm}%'
-      OR lastname LIKE '%${searchTerm}%'
+      OR email LIKE '%${searchTerm}%'
     LIMIT ${offset},${limit}`
   )
 
