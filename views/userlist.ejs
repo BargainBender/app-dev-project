@@ -63,8 +63,8 @@
             <td><%= user.email %></td>
           
             <td class="flex join transition duration-150 opacity-0">
-              <a href="/edituser/<%=user.id%>" data-return-from data-dynamic-btn class="hover-show join-item btn btn-primary text-primary-content capitalize"><i class="fa-regular fa-pen-to-square"></i></a>
-              <a href="/deleteuser/<%=user.id%>" data-return-from data-dynamic-btn class="hover-show join-item btn btn-error text-error-content capitalize"><i class="fa-solid fa-trash"></i></a>
+              <a href="/edituser/<%=user.id%>" role="button" aria-label="edit" data-return-from data-dynamic-btn class="hover-show join-item btn btn-primary text-primary-content capitalize"><i class="fa-regular fa-pen-to-square"></i></a>
+              <a href="/deleteuser/<%=user.id%>" role="button" aria-label="delete" data-return-from data-dynamic-btn class="hover-show join-item btn btn-error text-error-content capitalize"><i class="fa-solid fa-trash"></i></a>
             </td>
           </tr>
           <% }) %>
