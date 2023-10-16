@@ -1574,3 +1574,12 @@ html {
 .user-row:hover > td {
   opacity: 1;
 }
+
+.user-row:has(>td>a.hover-show:focus) > td {
+  opacity: 1;
+}
+
+.user-row:has(>td>a.hover-show:focus) {
+  opacity: 1;
+  background-color: #ededed;
+}
